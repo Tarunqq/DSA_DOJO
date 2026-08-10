@@ -1,0 +1,15 @@
+public class Decreasing_num_tri {
+    public static void main(String[] args) {
+        int n=4;
+
+        for(int i=n;i>=1;i--){
+            int last=(i*(i+1))/2;
+            int first=((i-1)*(i))/2;
+
+            for(int j=first+1;j<=last;j++){
+                System.out.print(j+" ");
+            }
+            System.out.println();
+        }
+    }
+}
