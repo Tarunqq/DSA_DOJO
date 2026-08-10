@@ -8,5 +8,13 @@ public class Floyd_Tri {
             }
             System.out.println();
         }
+
+        //for(int i=1;i<=n;i++){
+        //     for(int j=1;j<=i;j++){
+        //         System.out.print((char)('A'+Count)+" ");
+        //         Count++;
+        //     }
+        //     System.out.println();
+        // }
     }
 }
