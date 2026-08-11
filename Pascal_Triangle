@@ -1,0 +1,31 @@
+package Patterns;
+
+public class Pascal_Triangle {
+    public static int fact(int n){
+        if(n==1)
+            return 1;
+        
+        int res=1;
+        for(int i=n;i>=1;i--){
+            res=res*i;
+        }
+
+        return res;
+       
+    }
+    public static int ncr(int n,int r){
+        return fact(n)/(fact(r)*fact(n-r));
+    }
+    public static void main(String[] args) {
+        int n=5;
+        for(int i=0;i<n;i++){
+            for(int k=0;k<n-i-1;k++){
+                System.out.print(" ");
+            }
+            for(int j=0;j<=i;j++){
+                System.out.print(ncr(i,j)+" ");
+            }
+            System.out.println();
+        }
+    }
+}
