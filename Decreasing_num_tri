@@ -1,15 +1,23 @@
 public class Decreasing_num_tri {
     public static void main(String[] args) {
-        int n=4;
-
-        for(int i=n;i>=1;i--){
-            int last=(i*(i+1))/2;
-            int first=((i-1)*(i))/2;
-
-            for(int j=first+1;j<=last;j++){
-                System.out.print(j+" ");
+        int n=5;
+        boolean c=true;
+            for(int i=n;i>=1;i--){
+                int large=(i*(i+1))/2;
+                int small=((i-1)*i)/2;
+                if(c==true){
+                    for(int j=large;j>=small+1;j--){
+                        System.out.print(j+" ");
+                    }
+                    c=false;
+                }
+                else if(c==false){
+                    for(int j=small+1;j<=large;j++){
+                        System.out.print(j+" ");
+                    }
+                    c=true;
+                }
+                System.out.println();
             }
-            System.out.println();
-        }
     }
 }
