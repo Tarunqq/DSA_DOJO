@@ -1,0 +1,32 @@
+package Patterns;
+
+public class GCD {
+
+    //Approach 1 [Brute Apptoach]
+    public static void main(String[] args) {
+        int n1=36, n2=18;
+        int GCD=1;
+        for(int i=2;i<=Math.min(n1,n2);i++){
+            if(n1%i==0 && n2%i==0){
+                GCD=i;
+
+            }
+        }
+        System.out.println(GCD);
+    }
+
+    //Approach 2 [Optimal Approach- Euclidean Algorithm]
+    //GCD(a,b) => GCD(b,a%b), loop this until b => a%b => 0 
+    
+    // public static void main(String[] args) {
+    //     int a=7, b=13;
+
+    //     while(b!=0){
+    //         int rem=a%b;
+    //         a=b;
+    //         b=rem;
+    //     }
+
+    //     System.out.println(a);
+    // }
+}
