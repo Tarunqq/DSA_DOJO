@@ -1,0 +1,11 @@
+public class Digit_Count {
+    public static void main(String[] args) {
+        int n=10573;
+        int digit=0;
+        while(n>0){
+            n=n/10;
+            digit++;
+        }
+        System.out.println(digit);
+    }
+}
