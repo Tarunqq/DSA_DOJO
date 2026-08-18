@@ -1,0 +1,17 @@
+public class Automorphic_number {
+    public static void main(String[] args) {
+        int n=9376;
+        int sq=n*n;
+        boolean res=true;
+
+        while(n>0){
+            if((sq%10) != (n%10)){
+                res=false;
+                break;
+            }
+            sq/=10;
+            n/=10;
+        }
+        System.out.println(res);
+    }
+}
