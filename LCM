@@ -1,0 +1,56 @@
+public class LCM {
+    //[Approach-1] 
+    //24= 24,48,72,96,....
+    //36= 36,72,108,144,...
+    // for the above two numbers LCM(Least Commom Multiple) is 72.
+    //  public static void main(String[] args) {
+    //     int a=13, b=7;
+    //     int LCM=1;
+
+    //     for(int i=Math.max(a,b);i<=(a*b);i++){
+    //         if(i%a==0 && i%b==0){
+    //             LCM=i;
+    //             break;
+    //         }
+    //     }
+    //     System.out.println(LCM);
+    //  }
+
+    //[Approach -2], using formula=> (a*b)=LCM * GCD;
+    // public static void main(String[] args) {
+    //     int a=13, b=7;
+    //     int GCD=1;
+    //     for(int i=2;i<=Math.min(a,b);i++){
+    //         if(a%i==0 && b%i==0){
+    //             GCD=i;
+    //         }
+    //     }
+    //     System.out.println("GCD: "+GCD);
+
+    //     //formula=> (a*b)=LCM * GCD;
+    //     //LCM= (a*b)/GCD;
+        
+    //     System.out.println("LCM: "+(a*b)/GCD);
+    // }
+
+    //[Approach -3] using the formula=> (a*b)=LCM * GCD to find LCM after find GCD(Euclidean algo)
+    
+    public static void main(String[] args) {
+        int a=17, b=23;
+        int ab=a*b;
+        int GCD=1;
+        while(b!=0){
+            int rem=a%b;
+            a=b;
+            b=rem;
+        }
+        GCD=a;
+        System.out.println("GCD: "+GCD);
+
+        //formula=> (a*b)=LCM * GCD;
+        //LCM= (a*b)/GCD;
+
+        System.out.println("LCM: "+ab/GCD);
+
+    }
+}
