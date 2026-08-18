@@ -1,0 +1,55 @@
+public class Strong_number {
+    //[Approach-1] -- Brute force approach
+    // public static int fact(int n){
+    //     if(n==1||n==0){
+    //         return 1;
+    //     }
+    //     else{
+    //         int res=1;
+    //         for(int i=2;i<=n;i++){
+    //             res=res*i;
+    //         }
+    //         return res;
+    //     }
+    // }
+    // public static void main(String[] args) {
+    //     int n=148;
+    //     int new_n=n;
+    //     int sum=0;
+    //     while(n>0){
+    //         int digit=n%10;
+    //         sum+=fact(digit);
+    //         n/=10;
+    //     }
+    //     System.out.println(sum);
+    //     if(sum==new_n){
+    //         System.out.println("its a Strong number");
+    //     }
+    //     else{
+    //         System.out.println("its not a Strong number");
+    //     }
+    // }
+
+    //[Approach-2] Better Approach
+
+    public static void main(String[] args) {
+        int arr[]={1,1,2,6,24,120,720,5040,40320,362880};
+        
+        int n=241;
+        int new_n=n;
+        int sum=0;
+
+        while(n>0){
+            int ld=n%10;
+            sum+=arr[ld];
+            n/=10;
+        }
+
+        if(sum==new_n){
+             System.out.println("its a Strong number");
+        }
+        else{
+            System.out.println("its not a Strong number");
+        }
+    }
+}
