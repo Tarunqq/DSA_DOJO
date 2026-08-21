@@ -1,3 +1,4 @@
+[Approach - 1]
 public class Automorphic_number {
     public static void main(String[] args) {
         int n=9376;
@@ -13,5 +14,22 @@ public class Automorphic_number {
             n/=10;
         }
         System.out.println(res);
+    }
+}
+
+[Approach -2]
+
+class Automorpic number {
+    public static void main(String[] args) {
+        int n=25, new_n=n;
+        int sq=n*n, digits=0;;
+
+        while(n>0){
+            n=n/10;
+            digits++;
+        }
+
+        System.out.println(sq%(int)Math.pow(10,digits));
+        System.out.println(sq%(int)Math.pow(10,digits)==new_n);
     }
 }
