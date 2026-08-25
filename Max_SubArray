@@ -1,0 +1,81 @@
+//Brute-Approach
+
+class Max_SubArray {
+    public static void main(String[] args) {
+        int arr[]={1,2,3,-2,3,-1,4,5,-2,1};
+        int max=0,max_i=0,max_j=0;
+        for(int i=0;i<arr.length;i++){
+            for(int j=i;j<arr.length;j++){
+                int sum=0;
+                for(int k=i;k<=j;k++){
+                    System.out.print(arr[k]+" ");
+                    sum+=arr[k];
+                }
+                if(sum>max){
+                    max=sum;
+                    max_i=i;
+                    max_j=j;
+                }
+                System.out.println();
+            }
+            System.out.println();
+        }
+        System.out.println("max: "+max);
+        System.out.println("max_i: "+max_i);
+        System.out.println("max_j: "+max_j);
+    }
+}
+
+-------------------------------
+//Better-Approach(using prefix-sum)
+
+class Max_SubArray {
+    public static void main(String[] args) {
+        int arr[]={1,2,6,-2,5,-3,4,-2,3,2,2,-4,3};
+        int max=Integer.MIN_VALUE, max_i=0,max_j=0;
+        int prefix_sum[]=new int[arr.length];
+        
+        prefix_sum[0]=arr[0];
+        for(int i=1;i<arr.length;i++){
+            prefix_sum[i]=arr[i]+prefix_sum[i-1];
+        }
+
+        for(int i=0;i<arr.length;i++){
+            for(int j=i;j<arr.length;j++){
+                int sum=0;
+                if(i==0){
+                    sum=prefix_sum[j];
+                }
+                else{
+                    sum=prefix_sum[j]-prefix_sum[i-1];
+                }
+                if(sum>max){
+                    max=sum;
+                    max_i=i;
+                    max_j=j;
+                }
+            }
+        }
+        System.out.println("max: "+max);
+        System.out.println("max_i: "+max_i);
+        System.out.println("max_j: "+max_j);
+    }
+}
+
+---------------------------------------------
+//Optimal Approach(Kadane's algorithm)
+class Max_SubArray {
+    public static void main(String[] args) {
+        int arr[]={-2,-3,4,-1,-2,1,5,-3};
+        
+        int currSum=0, maxSum=Integer.MIN_VALUE;
+
+        for(int i=0;i<arr.length;i++){
+            currSum+=arr[i];
+            maxSum=Math.max(currSum,maxSum);
+            if(currSum<0)
+                currSum=0;
+        }
+        System.out.print(maxSum);
+    }
+}
