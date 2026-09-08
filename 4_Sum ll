@@ -1,0 +1,67 @@
+_______________________________________Brute__________________________________________________________________
+--------------------------------------------------------------------------------------------------------------
+import java.util.*;
+
+class Four_Sum II {  //n1+n2+n3 = -n4
+    public static void main(String[] args) {
+        int[] n1={1,2};
+        int[] n2={-2,-1};
+        int[] n3={-1,2};
+        int[] n4={0,2};
+
+        HashMap<Integer, Integer> map=new HashMap<>();
+
+        for(int i=0;i<n4.length;i++){
+            map.put(n4[i],map.getOrDefault(n4[i],0)+1);
+        }
+        int Cnt=0;
+
+        for(int i=0;i<n1.length;i++){
+            for(int j=0;j<n2.length;j++){
+                for(int k=0;k<n3.length;k++){
+                    int req=-(n1[i]+n2[j]+n3[k]);
+                    
+                    if(map.containsKey(req))
+                        Cnt=Cnt+map.get(req);
+                }
+            }
+        }
+        System.out.print(Cnt);
+    }
+}
+
+---------------------------------------Better--------------------------------------------
+_________________________________________________________________________________________
+
+import java.util.*;
+
+class Four_Sum II { n1+n2 = -(n3+n4);
+    public static void main(String[] args) {
+        int[] n1={1,2};
+        int[] n2={-2,-1};
+        int[] n3={-1,2};
+        int[] n4={0,2};
+        int Cnt=0;
+        
+        HashMap<Integer, Integer> map=new HashMap<>();
+
+        for(int i=0;i<n1.length;i++){
+            for(int j=0;j<n2.length;j++){
+                int sum=n1[i]+n2[j];
+                map.put(sum,map.getOrDefault(sum,0)+1);
+            }
+        }
+
+        for(int i=0;i<n3.length;i++){
+            for(int j=0;j<n4.length;j++){
+                int req=-(n3[i]+n4[j]);
+
+                if(map.containsKey(req))
+                    Cnt+=map.get(req);
+            }
+        }
+
+        System.out.print(Cnt);
+        
+    }
+}
