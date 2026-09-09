@@ -1,0 +1,41 @@
+//find the low-bound and high-bound [1,2,3,4,5,6,6,6,6,7,8,9] 
+//output as lowBound=5, HighBound=8
+
+class Main {
+    public static void main(String[] args) {
+        int arr[]={1,2,3,4,5,5,5,5,10,11};
+
+        int low=0,high=arr.length-1,target=5, lb=-1, hb=-1;
+
+        while(low<=high){
+            int mid=low+(high-low)/2;
+
+            if(arr[mid]==target){
+                lb=mid;
+                high=mid-1;
+            }
+            else if(arr[mid]<target)
+                low=mid+1;
+            else
+                high=mid-1;
+        }
+        
+        System.out.println("lower bound:"+lb);
+        low=0;
+        high=arr.length-1;
+        while(low<=high){
+            int mid=low+(high-low)/2;
+
+            if(arr[mid]==target){
+                hb=mid;
+                low=mid+1;
+            }
+            else if(arr[mid]<target)
+                low=mid+1;
+            else
+                high=mid-1;
+        }
+        System.out.println("High bound:"+hb);
+        
+    }
+}
