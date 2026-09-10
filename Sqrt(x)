@@ -1,0 +1,25 @@
+//Find the Sqrt of a Number using Binary Search
+
+class Sqrt {
+    public static void main(String[] args) {
+        int n=8;
+        int low=1,high=n,res=0;
+
+        while(low<=high){
+            int mid=low+(high-low)/2;
+
+            if(mid*mid<=n && (mid+1)*(mid+1)>n){
+                res=mid;
+                break;
+            }
+            else if(mid*mid<n){
+                low=mid+1;
+            }
+            else
+                high=mid-1;
+        }
+
+        System.out.print(res);
+                
+    }
+}
