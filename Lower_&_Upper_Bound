@@ -1,0 +1,35 @@
+class Main {
+    public static void main(String[] args) {
+        int[] arr={1,2,4,4,6,7,8,9,9,10};
+
+        int low=0, high=arr.length-1, target=12, ans=arr.length;
+        //Lower Bound
+        while(low<=high){
+            int mid=low+(high-low)/2;
+
+            if(arr[mid]>=target){
+                ans=mid;
+                high=mid-1;
+            }
+            else
+                low=mid+1;
+        }
+
+        System.out.println("Lb: "+ans);
+
+        low=0; high=arr.length-1; target=5; ans=arr.length;
+        //Upper Bound
+        while(low<=high){
+            int mid=low+(high-low)/2;
+
+            if(arr[mid]>target){
+                ans=mid;
+                high=mid-1;
+            }
+            else
+                low=mid+1;
+        }
+        System.out.println("Hb: "+ans);
+        
+    }
+}
