@@ -1,0 +1,18 @@
+class Pivot_Index {
+    public int pivotIndex(int[] nums) {
+        int rigSum=0,leftSum=0;
+        
+        for(int i=0;i<nums.length;i++){
+            rigSum+=nums[i];
+        }
+
+        for(int j=0;j<nums.length;j++){
+            rigSum-=nums[j];
+            if(leftSum == rigSum)
+                return j;
+            leftSum+=nums[j];
+        }
+        return -1;
+
+    }
+}
