@@ -1,0 +1,73 @@
+------------------------[BRUTE APPROACH]----------------------------------------------------
+class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        int arr[]=new int[nums.length];
+
+        for(int i=0;i<nums.length;i++){
+            int res=1;
+            for(int j=0;j<nums.length;j++){
+                if(i!=j)
+                    res*=nums[j];
+            }
+            arr[i]=res;
+        }
+
+        return arr;
+    }
+}
+
+-----------------------------------------[BETTER APPROACH]----------------------------------------------------
+
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+
+class Main {
+    public static void main(String[] args) {
+        int[] arr={2,4,6,8};
+        int[] prefix=new int[arr.length];
+        int[] suffix=new int[arr.length];
+
+        int[] new_arr=new int[arr.length];
+
+        prefix[0]=1;
+        for(int i=1;i<prefix.length;i++){
+            prefix[i]=prefix[i-1]*arr[i-1];
+        }
+
+        suffix[suffix.length-1]=1;
+        for(int j=suffix.length-2;j>=0;j--){
+            suffix[j]=suffix[j+1]*arr[j+1];
+        }
+
+        for(int k=0;k<new_arr.length;k++){
+            new_arr[k]=prefix[k]*suffix[k];
+        }
+
+        for(int k=0;k<new_arr.length;k++){
+            System.out.print(new_arr[k]+" ");
+        }
+        
+    }
+}
+
+-------------------------------------------------------[Optimal Approach]-------------------------------------------------------
+// here we reduced space complexity..
+
+class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        int new_arr[]=new int[nums.length];
+
+        new_arr[0]=1;
+        for(int i=1;i<new_arr.length;i++){
+            new_arr[i]=new_arr[i-1]*nums[i-1];
+        }
+
+        int suffix=1, n=new_arr.length;
+        for(int j=n-2;j>=0;j--){
+            suffix*=nums[j+1];
+            new_arr[j]*=suffix;
+        }
+
+        return new_arr;
+    }
+}
