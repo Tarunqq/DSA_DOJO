@@ -1,0 +1,66 @@
+------------------------------[Brute]----------------------------------
+
+class Solution {
+    public int findMaxLength(int[] nums) {
+        int count=0;
+        
+        for(int i=0;i<nums.length;i++){
+            int c_one=0,c_zero=0;
+            for(int j=i;j<nums.length;j++){
+                if(nums[j]==1)
+                    c_one++;
+                else
+                    c_zero++;
+                
+                if(j-i+1>count && c_one==c_zero)
+                    count=j-i+1;
+            }
+        }
+        return count;
+    }
+}
+------------------------------[Better]----------------------------------
+class Solution {
+    public int findMaxLength(int[] nums) {
+        int res=0;
+        
+        for(int i=0;i<nums.length;i++){
+            int count=0;
+            for(int j=i;j<nums.length;j++){
+                if(nums[j]==1)
+                    count++;
+                else
+                    count--;
+                
+                if(j-i+1>res && count==0)
+                    res=j-i+1;
+            }
+        }
+        return res;
+    }
+}
+-----------------------------[Optimal]-----------------------------------
+class Solution {
+    public int findMaxLength(int[] nums) {
+        HashMap<Integer, Integer> map=new HashMap<>();
+        
+        int sum=0,res=0;
+        map.put(sum,-1);
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]==1)
+                sum+=1;
+            else
+                sum-=1;
+
+            if(map.containsKey(sum)){
+                int length=i-map.get(sum);
+                if(length>res)
+                    res=length;
+            }
+            else
+                map.put(sum,i);
+
+        }
+        return res;
+    }
+}
