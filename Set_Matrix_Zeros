@@ -1,0 +1,103 @@
+-----------------------------------[BRUTE]-------------------------------------------------------------------
+class Solution {
+    public int[][] markRow(int[][] matrix, int i,int m){
+        for(int j=0;j<m;j++){
+            if(matrix[i][j]!=0)
+                matrix[i][j]=-1;
+        }
+        return matrix;
+    }
+
+    public int[][] markCol(int[][] matrix, int j,int n){
+        for(int i=0;i<n;i++){
+            if(matrix[i][j]!=0)
+                matrix[i][j]=-1;
+        }
+        return matrix;
+    }
+
+    public void setZeroes(int[][] matrix) {
+        for(int i=0;i<matrix.length;i++){
+            for(int j=0;j<matrix[0].length;j++){
+                if(matrix[i][j]==0){
+                    matrix=markRow(matrix,i,matrix[0].length);
+                    matrix=markCol(matrix,j,matrix.length);
+                }
+            }
+        }
+        
+        for(int i=0;i<matrix.length;i++){
+            for(int j=0;j<matrix[0].length;j++){
+                if(matrix[i][j]==-1)
+                    matrix[i][j]=0;
+            }
+        }
+    }
+}
+
+------------------------------------[BETTER]--------------------------------------------------------
+
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        int[] col=new int[matrix[0].length];
+        int[] row=new int[matrix.length];
+
+
+        for(int i=0;i<matrix.length;i++){
+            for(int j=0;j<matrix[0].length;j++){
+                if(matrix[i][j]==0){
+                    row[i]=1;
+                    col[j]=1;
+                }
+            }
+        }
+
+        for(int i=0;i<matrix.length;i++){
+            for(int j=0;j<matrix[0].length;j++){
+                if(row[i]==1 || col[j]==1)
+                    matrix[i][j]=0;
+            }
+        }
+        
+        
+    }
+}
+
+---------------------[Optimal]------------------------------------------------
+[to revise this code watch Nikhil Lohia's set Matrix zeros(LC-73) video]
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        boolean firstRow=false, firstCol=false;
+
+        for(int i=0;i<matrix.length;i++){
+            for(int j=0;j<matrix[0].length;j++){
+                if(matrix[i][j]==0){
+                    if(i==0)
+                        firstRow=true;
+                    
+                    if(j==0)
+                        firstCol=true;
+
+                    matrix[i][0]=0;
+                    matrix[0][j]=0;
+                }
+            }
+        }
+
+        for(int i=1;i<matrix.length;i++){
+            for(int j=1;j<matrix[0].length;j++){
+                if(matrix[i][0]==0 || (matrix[0][j]==0))
+                    matrix[i][j]=0;
+            }
+        }
+
+        if(firstRow)
+            for(int i=0;i<matrix[0].length;i++)
+                matrix[0][i]=0;
+        
+        if(firstCol)
+            for(int j=0;j<matrix.length;j++)
+                matrix[j][0]=0;
+        
+    }
+}
