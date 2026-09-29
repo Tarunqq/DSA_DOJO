@@ -1,0 +1,26 @@
+class Solution {
+    public boolean checkInclusion(String s1, String s2) {
+        int[] have=new int[26];
+        int[] need=new int[26];
+        int windLen=s1.length();
+        if(s1.length()>s2.length())
+            return false;
+        
+        for(int i=0;i<windLen;i++){
+            need[s1.charAt(i)-'a']++;
+            have[s2.charAt(i)-'a']++;
+        }
+        if(Arrays.compare(need, have)==0)
+            return true;
+
+        for(int r=1;r<s2.length()-windLen+1;r++){
+            have[s2.charAt(r-1)-'a']--;
+            have[s2.charAt(r+windLen-1)-'a']++;
+
+            if(Arrays.compare(need, have)==0)
+                return true;
+        }
+
+        return false;
+    }
+}
