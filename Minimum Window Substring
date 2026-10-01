@@ -1,0 +1,35 @@
+class Solution {
+    public boolean check(HashMap<Character, Integer> have,HashMap<Character, Integer> window){
+        for(Map.Entry<Character, Integer> entry:have.entrySet()){
+            if(entry.getValue()>window.getOrDefault(entry.getKey(),0))
+                return false;
+        }
+        return true;
+    }
+    public String minWindow(String s, String t) {
+        HashMap<Character, Integer> have=new HashMap<>();
+        HashMap<Character, Integer> window=new HashMap<>();
+        int left=0, wdLen=Integer.MAX_VALUE,st=0,end=-1;
+
+        for(int i=0;i<t.length();i++){
+            have.put(t.charAt(i),have.getOrDefault(t.charAt(i), 0)+1);
+        }
+
+        int count=0;
+        for(int r=0;r<s.length();r++){
+            window.put(s.charAt(r),window.getOrDefault(s.charAt(r), 0)+1);
+            count++;
+
+            while(count>=t.length() && check(have, window)){
+                if(r-left+1<wdLen){
+                    st=left;
+                    end=r;
+                }
+                wdLen=Math.min(wdLen, r-left+1);
+                window.put(s.charAt(left),window.getOrDefault(s.charAt(left), 0)-1);
+                left++;
+            } 
+        }
+        return s.substring(st,end+1);
+    }
+}
