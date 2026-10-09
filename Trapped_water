@@ -26,28 +26,53 @@ class Trapped_Water {
     }
 }
 ----------------------------------------------[Optimal 2]------------------------------------------------
-// explaination from apna college in Youtube
+//Using monotonic stack
 class Solution {
     public int trap(int[] height) {
-        int left=0,right=height.length-1;
-        int leftMax=0, rightMax=0, sum=0;
+        Stack<Integer> st=new Stack<>();
 
-        while(left<right){
-            leftMax=Math.max(leftMax,height[left]);
-            rightMax=Math.max(rightMax,height[right]);
+        int left[]=new int[height.length];
+        int right[]=new int[height.length];
+        int sum=0;
 
-            if(leftMax<rightMax){
-                sum+=leftMax-height[left];
-                left++;
-            }
+        for(int i=0;i<height.length;i++){
+            while(!st.empty() && st.peek()<=height[i])
+                st.pop();
+
+            if(st.empty())
+                left[i]=0;
             else
-            {
-                sum+=rightMax-height[right];
-                right--;
-            }
+                left[i]=st.peek();
+
+            if(st.empty())
+                st.push(height[i]);
+            else if(st.peek()>height[i])
+                left[i]=st.peek();
         }
 
+        st.clear();
+
+        for(int i=height.length-1;i>=0;i--){
+            while(!st.empty() && st.peek()<=height[i])
+                st.pop();
+
+            if(st.empty())
+                right[i]=0;
+            else
+                right[i]=st.peek();
+
+            if(st.empty())
+                st.push(height[i]);
+            else if(st.peek()>height[i])
+                right[i]=st.peek();
+        }
+
+        for(int i=0;i<height.length;i++){
+            if((left[i]==0 || right[i]==0))
+                continue;
+            else
+                sum+=Math.min(left[i],right[i])-height[i];
+        }
         return sum;
-        
     }
 }
