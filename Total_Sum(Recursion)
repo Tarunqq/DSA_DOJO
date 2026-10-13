@@ -1,0 +1,24 @@
+// Online Java Compiler (Editor)
+// Write and run Java online using this editor.
+
+class Main {  
+    public static int EvenSum(int[] arr,int ind){
+        if(ind>=arr.length)
+            return 0;
+        return (arr[ind]%2==0? arr[ind] : 0)+EvenSum(arr,ind+1);
+    }
+    
+    public static int TotalSum(int[] arr,int ind){
+        if(ind>=arr.length)
+            return 0;
+        return arr[ind]+TotalSum(arr,ind+1);
+    }
+    
+    public static void main(String[] args) {
+        int[] arr={3,4,5,6,7,8,9,10,11};
+        
+        System.out.println("Total-SUM: "+TotalSum(arr,0));
+        System.out.println("EVEN-SUM: "+EvenSum(arr,0));
+        System.out.println("Odd-Sum:"+(TotalSum(arr,0)-EvenSum(arr,0)));
+    }
+}
