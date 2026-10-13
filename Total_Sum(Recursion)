@@ -13,12 +13,19 @@ class Main {
             return 0;
         return arr[ind]+TotalSum(arr,ind+1);
     }
+
+    public static int MaxEleArray(int[] arr,int ind){
+        if(ind>=arr.length)
+            return 0;
+        return Math.max(arr[ind],MaxEleArray(arr, ind+1));
+    }
     
     public static void main(String[] args) {
-        int[] arr={3,4,5,6,7,8,9,10,11};
+        int[] arr={3,4,15,6,7,8,9,10,11};
         
         System.out.println("Total-SUM: "+TotalSum(arr,0));
         System.out.println("EVEN-SUM: "+EvenSum(arr,0));
         System.out.println("Odd-Sum:"+(TotalSum(arr,0)-EvenSum(arr,0)));
+        System.out.println("Max: "+MaxEleArray(arr,0));
     }
 }
