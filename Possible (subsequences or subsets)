@@ -1,0 +1,42 @@
+// Online Java Compiler (Editor)
+// Write and run Java online using this editor.
+import java.util.*;
+class Main {
+    public static void solve(int i, List<Integer> curr,int[] arr, int n)
+    {
+        if(i==n){
+            System.out.println(curr);
+            return;
+        }
+        curr.add(arr[i]);
+        solve(i+1,curr,arr,n);
+        curr.remove(curr.size()-1);
+        solve(i+1,curr,arr,n);
+    }
+    public static void main(String[] args) {
+        int[] arr={4,5,8,9};
+        solve(0,new ArrayList<>(), arr,arr.length);
+    }
+}
+
+----------------------------------------------------------------------------------------
+//Leetcode - 78
+
+class Solution {
+    public void solve(int i,List<Integer> curr,int[] arr,int n, List<List<Integer>> res){
+        if(i==n){
+            res.add(new ArrayList<>(curr));
+            return;
+        }
+        curr.add(arr[i]);
+        solve(i+1, curr, arr,n, res);
+        curr.remove(curr.size()-1);
+        solve(i+1, curr, arr,n, res);
+    }
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> res=new ArrayList<>();
+        solve(0, new ArrayList<>(), nums, nums.length, res);
+        return res;
+    }
+}
+
