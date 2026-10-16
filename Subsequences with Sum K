@@ -1,0 +1,81 @@
+-----------------------print all subsets with sum == k----------------------------------------
+import java.util.*;
+public class MainClass {
+    static int k = 3;
+
+    public static void solve(int i, List<Integer> curr, int sum, int[] arr, int n) {
+        if (i == n) {
+            if (sum == k) {
+                System.out.println(curr);
+            }
+            return;
+        }
+
+        // Include the current element
+        curr.add(arr[i]);
+        solve(i + 1, curr, sum + arr[i], arr, n);
+
+        // Backtrack: remove the current element
+        curr.remove(curr.size() - 1);
+
+        // Exclude the current element
+        solve(i + 1, curr, sum, arr, n);
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {0, 1, 2};
+        int sum = 0;
+
+        solve(0, new ArrayList<>(), sum, arr, arr.length);
+    }
+}
+
+----------------------------------------print only one subset sum==k, after that stop--------------------------------------------------------
+// Online Java Compiler (Editor)
+// Write and run Java online using this editor.
+import java.util.*;
+class Main {
+    static int k=3;
+    public static boolean solve(int i,List<Integer> curr,int sum,int[] arr,int n){
+        if(i==n){
+            if(sum==k){
+                System.out.println(curr);
+                return true;
+            }
+            return false;
+        }
+        curr.add(arr[i]);
+        solve(i+1,curr,sum+arr[i],arr,n);
+        curr.remove(curr.size()-1);
+        solve(i+1,curr,sum,arr,n);
+
+        return false;
+    }
+    public static void main(String[] args) {
+        int[] arr={0,1,2};
+
+        solve(0,new ArrayList<>(),0,arr,arr.length);
+    }
+}
+-------------------------------------------Count the number of subsets(without using count variable)---------------------------------------
+// Online Java Compiler (Editor)
+// Write and run Java online using this editor.
+import java.util.*;
+class Main {
+    static int k=2;
+    public static int solve(int i,List<Integer> curr,int sum,int[] arr,int n){
+        if(i==n){
+                return (sum==k)?1:0;
+        }
+        curr.add(arr[i]);
+        int take=solve(i+1,curr,sum+arr[i],arr,n);
+        curr.remove(curr.size()-1);
+        int skip=solve(i+1,curr,sum,arr,n);
+        return take+skip;
+    }
+    public static void main(String[] args) {
+        int[] arr={0,1,2};
+
+        System.out.print(solve(0,new ArrayList<>(),0,arr,arr.length));
+    }
+}
