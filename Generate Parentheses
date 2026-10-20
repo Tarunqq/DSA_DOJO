@@ -1,0 +1,62 @@
+------------------------Brute Approach-------------------------------------
+
+class Solution {
+    public boolean stak(StringBuilder curr){
+        Stack<Character> st=new Stack<>();
+
+        for(int i=0;i<curr.length();i++){
+            char ch=curr.charAt(i);
+
+            if(ch=='('){
+                st.push(ch);
+            }
+            else{
+                if(st.empty())
+                    return false;
+                st.pop();
+            }
+        }
+        return st.isEmpty();
+    }
+    public void solve(int idx,int n, List<String> res, StringBuilder curr){
+        if(idx==(2*n)){
+            if(stak(curr))
+                res.add(curr.toString());
+            return;
+        }
+        solve(idx+1,n,res, curr.append("("));
+        curr.deleteCharAt(curr.length()-1);
+        solve(idx+1,n,res, curr.append(")"));
+        curr.deleteCharAt(curr.length()-1);
+    }
+    public List<String> generateParenthesis(int n) {
+        List<String> res=new ArrayList<>();
+        solve(0,n,res,new StringBuilder());
+        return res;
+    }
+}
+
+--------------------------------------Better Approach--------------------------------
+class Solution {
+    public void solve(int n,int open,int close, List<String> res, StringBuilder curr){
+        if(curr.length()==(2*n)){
+            res.add(curr.toString());
+            return;
+        }
+
+        if(open<n){
+            solve(n,open+1,close,res,curr.append("("));
+            curr.deleteCharAt(curr.length()-1);
+        }
+
+        if(close<open){
+            solve(n,open,close+1,res,curr.append(")"));
+            curr.deleteCharAt(curr.length()-1);
+        }
+    }
+    public List<String> generateParenthesis(int n) {
+        List<String> res=new ArrayList<>();
+        solve(n,0,0,res,new StringBuilder());
+        return res;
+    }
+}
