@@ -1,0 +1,74 @@
+_---------refer it before entering into Linked list------------------------------------
+------------------first demo prog to print value in Linked List----------------------
+note: we don't need to create ListNode class in Leetcode where it was already created internally, we can just use it directly-----
+class ListNode{
+    int val;
+    ListNode next;
+
+    ListNode(){};
+
+    ListNode(int val){
+        this.val=val;
+    }
+
+    ListNode(int val, ListNode next){
+        this.val=val;
+        this.next=next;
+    }
+}
+class Main {
+    public static void main(String[] args) {
+        ListNode head=new ListNode(10);
+        head.next=new ListNode(20);
+        head.next.next=new ListNode(30);
+        head.next.next.next=new ListNode(40);
+
+        ListNode temp=head;
+
+        while(temp!=null){
+            System.out.print(temp.val+" ");
+            temp=temp.next;
+        }
+    }
+}
+--------------------------------------
+------------Delete a node----------------------------------------------------------------------
+class ListNode{
+    int val;
+    ListNode next;
+
+    ListNode(){};
+
+    ListNode(int val){
+        this.val=val;
+    }
+
+    ListNode(int val, ListNode next){
+        this.val=val;
+        this.next=next;
+    }
+}
+class Main {
+    public static void main(String[] args) {
+        ListNode head=new ListNode(10);
+        head.next=new ListNode(20);
+        head.next.next=new ListNode(30);
+        head.next.next.next=new ListNode(40);
+        int target=30;
+        ListNode temp=head;
+
+        while(temp!=null){
+            if(temp.next!=null && temp.next.val==target){
+                temp.next=temp.next.next;
+            }
+            else{
+                temp=temp.next;
+            }
+        }
+        ListNode curr=head;
+        while(curr!=null){
+            System.out.print(curr.val+" ");
+            curr=curr.next;
+        }
+    }
+}
