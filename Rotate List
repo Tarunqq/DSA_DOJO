@@ -1,0 +1,77 @@
+----------------------------------------------Brute----------------------
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+        ListNode temp=head;
+        ListNode temp2=head;
+        int cnt=0;
+        if(head==null || head.next==null){
+            return head;
+        }
+        while(temp2!=null){
+            cnt++;
+            temp2=temp2.next;
+        }
+        
+        k=k%cnt;
+        while(k>0){
+            while(temp.next.next!=null){
+                temp=temp.next;
+            }
+            ListNode sh=temp.next;
+            temp.next=null;
+            sh.next=head;
+            head=sh;
+            temp=head;
+            k--;
+        }
+
+        return head;
+    }
+}
+----------------------optimal--------------------------------------------
+----------refer striver's code in youtube-------------------
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+        ListNode temp=head;
+        if(head==null || head.next==null)
+            return head;
+        
+        int cnt=1;
+        while(temp.next!=null){
+            cnt++;
+            temp=temp.next;
+        }
+        temp.next=head;
+        k=k%cnt;
+        ListNode cut=head;
+        int sh=cnt-k-1;
+        while(sh>0){
+            cut=cut.next;
+            sh--;
+        }
+        head=cut.next;
+        cut.next=null;
+
+        return head;
+    }
+}
