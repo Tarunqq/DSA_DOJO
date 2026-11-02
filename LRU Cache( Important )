@@ -1,0 +1,82 @@
+--------------------refer codestoryWithMIK youtube channel for explanation-----------------------
+class Node{
+    int key,value;
+    Node next, prev;
+
+    Node(int key,int value){
+        this.key=key;
+        this.value=value;
+    }
+}
+class LRUCache {
+    HashMap<Integer, Node> map=new HashMap<>();
+    int n;
+
+    Node head=new Node(0,0);
+    Node tail=new Node(0,0);
+
+    
+    public LRUCache(int capacity) {
+        n=capacity;
+        head.next=tail;
+        tail.prev=head;
+    }
+    
+    public void remove(Node node){
+        node.prev.next=node.next;
+        node.next.prev=node.prev;
+    }
+
+    public void addToFront(Node node){
+        node.next=head.next;
+        node.prev=head;
+
+        head.next.prev=node;
+        head.next=node;
+    }
+
+    public int get(int key) {
+        if(map.size()==0 || !map.containsKey(key))
+            return -1;
+
+        Node node=map.get(key);
+
+        remove(node);
+        addToFront(node);
+
+        return node.value;
+    }
+    
+    public void put(int key, int value) {
+        Node node=new Node(key, value);
+
+        if(map.containsKey(key)){
+            Node node1=map.get(key);
+            node1.value=value;
+            remove(node1);
+            addToFront(node1);
+        }
+        else{
+            if(map.size()==n){
+                Node lru=tail.prev;
+                map.remove(lru.key);
+                remove(lru);
+
+                map.put(key, node);
+                addToFront(node);
+            }
+            else{
+                map.put(key, node);
+                addToFront(node);
+            }
+        }
+
+    }
+}
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache obj = new LRUCache(capacity);
+ * int param_1 = obj.get(key);
+ * obj.put(key,value);
+ */
