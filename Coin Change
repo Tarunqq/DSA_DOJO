@@ -1,0 +1,61 @@
+--------------------------Brute-------------------------------------------------
+but gives us TLE, so in next approach we go with DP
+class Solution {
+    public int cc(int[] coins, int amount){
+        if(amount==0)
+            return 0;
+
+        int min=Integer.MAX_VALUE;
+        for(int i=0;i<coins.length;i++){
+            if(coins[i]<=amount){
+                int res=cc(coins, amount-coins[i]);
+                if(res!=Integer.MAX_VALUE)
+                    min=Math.min(min, res+1);
+            }
+        }
+        return min;
+    }
+    public int coinChange(int[] coins, int amount) {
+        int min=cc(coins,amount);
+
+        if(min!=Integer.MAX_VALUE)
+            return min;
+        else
+            return -1;
+    }
+}
+----------------------------Optimal(DP)---------------------------------------------------
+class Solution {
+    public int cc(int[] coins, int amount, int[] arr){
+        if(amount==0)
+            return 0;
+
+        if(arr[amount]!=-1)
+            return arr[amount];
+
+        int min=Integer.MAX_VALUE;
+        for(int i=0;i<coins.length;i++){
+            if(coins[i]<=amount){
+                int res=cc(coins, amount-coins[i],arr);
+                if(res!=Integer.MAX_VALUE)
+                    min=Math.min(min, res+1);
+            }
+        }
+        arr[amount]=min;
+        return min;
+    }
+    public int coinChange(int[] coins, int amount) {
+        int[] arr=new int[amount+1];
+
+        for(int i=0;i<arr.length;i++){
+            arr[i]=-1;
+        }
+
+        int min=cc(coins,amount,arr);
+
+        if(min!=Integer.MAX_VALUE)
+            return min;
+        else
+            return -1;
+    }
+}
