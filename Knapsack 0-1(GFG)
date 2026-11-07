@@ -1,0 +1,32 @@
+import java.util.*;
+class Solution {
+    public int solve(int W, int val[], int wt[], int n,int[][] memo){
+        if(n<0 || W<=0)
+            return 0;
+            
+        if(memo[W][n]!=-1)
+            return memo[W][n];
+        
+        int pick=0;
+        if(W>=wt[n])    
+            pick=solve(W-wt[n], val, wt, n-1, memo)+val[n];
+            
+        int nPick=solve(W, val, wt, n-1, memo);
+        
+        memo[W][n]=Math.max(pick,nPick);
+        
+        return memo[W][n];
+        
+    }
+    public int knapsack(int W, int val[], int wt[]) {
+        // code here
+        int n=wt.length;
+        int[][] memo=new int[W+1][n];
+        for(int i=0;i<memo.length;i++){
+            for(int j=0;j<memo[0].length;j++){
+                memo[i][j]=-1;
+            }
+        }
+        return solve(W, val, wt, n-1,memo);
+    }
+}
