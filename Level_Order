@@ -1,0 +1,46 @@
+// Online Java Compiler (Editor)
+// Write and run Java online using this editor.
+import java.util.*;
+class Node{
+    int val;
+    Node left;
+    Node right;
+
+    Node(int val){
+        this.val=val;
+        this.left=null;
+        this.right=null;
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        List<Integer> ls=new ArrayList<>();
+        Deque<Node> dq=new ArrayDeque<>();
+        
+        Node root=new Node(1);
+
+        root.left=new Node(3);
+        root.right=new Node(5);
+
+        root.left.left=new Node(7);
+        root.left.right=new Node(8);
+
+        root.right.left=new Node(9);
+        root.right.right=new Node(10);
+
+        dq.offer(root);
+
+        while(!dq.isEmpty()){
+            Node front=dq.poll();
+            ls.add(front.val);
+            
+            if(front.left!=null)
+                dq.offer(front.left);
+            if(front.right!=null)
+                dq.offer(front.right);
+        }
+
+        System.out.print(ls);
+    }
+}
